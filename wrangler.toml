@@ -1,0 +1,13 @@
+name = "diary-blog"
+main = "dist/index.js"
+compatibility_date = "2024-01-01"
+assets = { directory = "public" }
+
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "diary-blog-images"
+
+[env.production]
+routes = [
+  { pattern = "diary.ateruimashin.com/*", zone_name = "ateruimashin.com" }
+]

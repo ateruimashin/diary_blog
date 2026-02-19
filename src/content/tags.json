@@ -1,0 +1,129 @@
+[
+    {
+        "id": 1,
+        "key": "pc-game",
+        "label": "PCゲーム",
+        "description": "PCゲームに関する記事"
+    },
+    {
+        "id": 2,
+        "key": "warframe",
+        "label": "Warframe",
+        "description": "Warframe に関する記事",
+        "parentId": 1
+    },
+    {
+        "id": 3,
+        "key": "civilization-6",
+        "label": "Civilization 6",
+        "description": "Civilization 6 に関する記事",
+        "parentId": 1
+    },
+    {
+        "id": 4,
+        "key": "legend-of-league",
+        "label": "Legend of League",
+        "description": "Legend of League に関する記事",
+        "parentId": 1
+    },
+    {
+        "id": 5,
+        "key": "mgsv-tpp",
+        "label": "MGSV:TPP",
+        "description": "METAL GEAR SOLID V: THE PHANTOM PAIN に関する記事",
+        "parentId": 1
+    },
+    {
+        "id": 6,
+        "key": "mtg-arena",
+        "label": "MTG Arena",
+        "description": "MTG Arena に関する記事",
+        "parentId": 1
+    },
+    {
+        "id": 7,
+        "key": "steam",
+        "label": "steam",
+        "description": "Steam に関する記事",
+        "parentId": 1
+    },
+    {
+        "id": 8,
+        "key": "rainbow-six-siege",
+        "label": "Tom Clancy's Rainbow Six Siege",
+        "description": "Rainbow Six Siege に関する記事",
+        "parentId": 1
+    },
+    {
+        "id": 9,
+        "key": "eroge",
+        "label": "エロゲ",
+        "description": "エロゲに関する記事",
+        "parentId": 1
+    },
+    {
+        "id": 10,
+        "key": "tft",
+        "label": "TFT",
+        "description": "Teamfight Tactics に関する記事",
+        "parentId": 1
+    },
+    {
+        "id": 11,
+        "key": "bicycle",
+        "label": "自転車",
+        "description": "自転車に関する記事"
+    },
+    {
+        "id": 12,
+        "key": "road-bike",
+        "label": "ロードバイク",
+        "description": "ロードバイクに関する記事",
+        "parentId": 11
+    },
+    {
+        "id": 13,
+        "key": "cross-bike",
+        "label": "クロスバイク",
+        "description": "クロスバイクに関する記事",
+        "parentId": 11
+    },
+    {
+        "id": 14,
+        "key": "diary",
+        "label": "日記",
+        "description": "日記に関する記事"
+    },
+    {
+        "id": 15,
+        "key": "travel",
+        "label": "旅行",
+        "description": "旅行に関する記事"
+    },
+    {
+        "id": 16,
+        "key": "railroad",
+        "label": "鉄道",
+        "description": "鉄道に関する記事",
+        "parentId": 15
+    },
+    {
+        "id": 17,
+        "key": "ekimemo",
+        "label": "駅メモ",
+        "description": "駅メモに関する記事",
+        "parentId": 15
+    },
+    {
+        "id": 18,
+        "key": "board-game",
+        "label": "ボードゲーム",
+        "description": "ボードゲームに関する記事"
+    },
+    {
+        "id": 19,
+        "key": "figure",
+        "label": "フィギュア",
+        "description": "フィギュアに関する記事"
+    }
+]

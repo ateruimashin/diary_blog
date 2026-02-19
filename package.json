@@ -1,0 +1,39 @@
+{
+    "name": "diary-blog",
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite dev",
+        "deploy": "npm run build && wrangler deploy",
+        "prepare": "tsx scripts/prepare-commit.ts",
+        "new": "tsx scripts/new-post.ts",
+        "add-tag": "tsx scripts/add-tag.ts"
+    },
+    "dependencies": {
+        "hono": "^4.0.0",
+        "marked-shiki": "^1.2.1",
+        "shiki": "^3.22.0"
+    },
+    "devDependencies": {
+        "@aws-sdk/client-s3": "^3.0.0",
+        "@cloudflare/workers-types": "^4.0.0",
+        "@hono/vite-dev-server": "^0.16.0",
+        "@hono/vite-ssg": "^0.1.0",
+        "@inquirer/checkbox": "^5.0.7",
+        "@inquirer/confirm": "^6.0.7",
+        "@inquirer/input": "^5.0.7",
+        "@inquirer/select": "^5.0.7",
+        "@types/katex": "^0.16.8",
+        "@types/node": "^25.2.3",
+        "glob": "^10.0.0",
+        "gray-matter": "^4.0.3",
+        "katex": "^0.16.28",
+        "marked": "^12.0.0",
+        "marked-katex-extension": "^5.1.7",
+        "tsx": "^4.0.0",
+        "typescript": "^5.0.0",
+        "vite": "^7.3.1",
+        "wrangler": "^4.65.0"
+    }
+}

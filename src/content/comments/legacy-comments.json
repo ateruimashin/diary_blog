@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "postSlug": "sample-published",
+        "postTitle": "サンプル公開記事",
+        "author": "テストユーザー1",
+        "date": "2024-02-17",
+        "content": "素晴らしい記事ですね!とても参考になりました。"
+    },
+    {
+        "id": 2,
+        "postSlug": "sample-published",
+        "postTitle": "サンプル公開記事",
+        "author": "テストユーザー2",
+        "date": "2024-02-18",
+        "content": "このアプローチは初めて知りました。試してみます。"
+    }
+]
