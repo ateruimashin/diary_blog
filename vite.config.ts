@@ -6,6 +6,12 @@ export default defineConfig({
     plugins: [
         devServer({
             entry: 'src/index.ts',
+            exclude: [
+                /^\/images\/.*/,
+                /^\/styles\.css$/,
+                /^\/@.*/,
+                /^\/node_modules\/.*/,
+            ],
         }),
         ssg({
             entry: 'src/index.ts',
