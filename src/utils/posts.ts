@@ -147,9 +147,67 @@ export function parseMarkdownFile(filePath: string): Post {
 }
 
 /**
+ * 旅程ブロックのテキストをHTMLに変換
+ *
+ * 書式:
+ *   HH:MM発 駅名  ... 出発駅
+ *   HH:MM着 駅名  ... 到着駅
+ *   路線名 | 所要時間 ... 乗車路線(所要時間は | で区切る、省略可)
+ *   ->駅名        ... 直通中間駅
+ *   (空行)         ... 乗り換え区切り
+ */
+function buildItineraryHtml(text: string): string {
+    const lines = text.trim().split('\n');
+    let html = '<div class="itinerary">\n';
+
+    for (const line of lines) {
+        const trimmed = line.trim();
+
+        if (!trimmed) {
+            // 空行 = 乗り換え区切り
+            html += '<hr class="itinerary-sep">\n';
+        } else if (/^\d{2}:\d{2}(発|着)/.test(trimmed)) {
+            // 駅行 : "HH:MM発 駅名" or "HH:MM着 駅名"
+            const match = trimmed.match(/^(\d{2}:\d{2}(?:発|着))\s+(.+)$/);
+            if (match) {
+                html += `<div class="itinerary-station"><span class="it-time">${match[1]}</span><span class="it-name">${match[2]}</span></div>\n`;
+            }
+        } else if (trimmed.startsWith('->')) {
+            // 直通中間駅 : "->駅名"
+            const stationName = trimmed.slice(2).trim();
+            html += `<div class="itinerary-through"><span class="it-through-label">（直通）</span><span class="it-through-name">${stationName}</span></div>\n`;
+        } else {
+            // 路線行 : "路線名 | 所要時間" or "路線名"
+            const pipeIndex = trimmed.indexOf('|');
+            if (pipeIndex !== -1) {
+                const routeName = trimmed.slice(0, pipeIndex).trim();
+                const duration = trimmed.slice(pipeIndex + 1).trim();
+                html += `<div class="itinerary-route">${routeName}<br>${duration}</div>\n`;
+            } else {
+                html += `<div class="itinerary-route">${trimmed}</div>\n`;
+            }
+        }
+    }
+
+    html += '</div>\n';
+    return html;
+}
+
+/**
+ * Markdown内の ```itinerary ブロックをHTMLに変換するプリプロセッサ
+ */
+function processItineraryBlocks(markdown: string): string {
+    return markdown.replace(/```itinerary\n([\s\S]*?)```/g, (_, content: string) => {
+        return buildItineraryHtml(content);
+    });
+}
+
+/**
  * MarkdownをHTMLに変換 (KaTeX数式レンダリング + Shikiシンタックスハイライト対応)
  */
 export async function markdownToHtml(markdown: string): Promise<string> {
+    // itinerary ブロックを先にHTMLへ変換(shikiに渡す前に処理する)
+    const preprocessed = processItineraryBlocks(markdown);
     const highlighter = await createHighlighter({
         themes: ['github-dark'],
         langs: [
@@ -172,7 +230,7 @@ export async function markdownToHtml(markdown: string): Promise<string> {
         },
     }));
 
-    return await marked(markdown);
+    return await marked(preprocessed);
 }
 
 /**
