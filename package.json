@@ -8,7 +8,8 @@
         "deploy": "npm run build && wrangler deploy",
         "prepare": "tsx scripts/prepare-commit.ts",
         "new": "tsx scripts/new-post.ts",
-        "add-tag": "tsx scripts/add-tag.ts"
+        "add-tag": "tsx scripts/add-tag.ts",
+        "list-tags": "tsx scripts/list-tags.ts"
     },
     "dependencies": {
         "hono": "^4.0.0",
