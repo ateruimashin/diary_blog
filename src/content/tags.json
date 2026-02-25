@@ -125,5 +125,11 @@
         "key": "figure",
         "label": "フィギュア",
         "description": "フィギュアに関する記事"
+    },
+    {
+        "id": 20,
+        "key": "pc",
+        "label": "自作PC",
+        "description": "自作PCに関する記事"
     }
 ]
