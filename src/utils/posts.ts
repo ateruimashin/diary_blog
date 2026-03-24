@@ -194,6 +194,13 @@ function buildItineraryHtml(text: string): string {
 }
 
 /**
+ * ![alt](url)(caption) 記法をmarked標準の ![alt](url "caption") に変換するプリプロセッサ
+ */
+function processImageCaptions(markdown: string): string {
+    return markdown.replace(/!\[([^\]]*)\]\(([^)]+)\)\(([^)]+)\)/g, '![$1]($2 "$3")');
+}
+
+/**
  * Markdown内の ```itinerary ブロックをHTMLに変換するプリプロセッサ
  */
 function processItineraryBlocks(markdown: string): string {
@@ -206,8 +213,8 @@ function processItineraryBlocks(markdown: string): string {
  * MarkdownをHTMLに変換 (KaTeX数式レンダリング + Shikiシンタックスハイライト対応)
  */
 export async function markdownToHtml(markdown: string): Promise<string> {
-    // itinerary ブロックを先にHTMLへ変換(shikiに渡す前に処理する)
-    const preprocessed = processItineraryBlocks(markdown);
+    // プリプロセッサを順に適用
+    const preprocessed = processItineraryBlocks(processImageCaptions(markdown));
     const highlighter = await createHighlighter({
         themes: ['github-dark'],
         langs: [
@@ -220,6 +227,17 @@ export async function markdownToHtml(markdown: string): Promise<string> {
     });
 
     marked.use(markedKatex({ throwOnError: false }));
+    marked.use({
+        renderer: {
+            image(href: string, title: string | null, text: string): string {
+                const imgTag = `<img src="${href}" alt="${text}">`;
+                if (title) {
+                    return `<figure class="post-figure">${imgTag}<figcaption>${title}</figcaption></figure>\n`;
+                }
+                return `${imgTag}\n`;
+            },
+        },
+    });
     marked.use(markedShiki({
         highlight(code, lang, props) {
             return highlighter.codeToHtml(code, {
