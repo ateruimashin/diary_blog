@@ -127,6 +127,23 @@ KaTeX でサポートされている記法は [KaTeX サポート一覧](https:/
 
 `public/images/` に配置した画像はコミット時に自動で Cloudflare R2 にアップロードされます (`npm run prepare`)。
 
+### キャプション付き画像
+
+画像URLの直後に `(キャプション)` を追加するとキャプションが表示されます。
+
+```markdown
+![代替テキスト](./images/image.png)(しまなみ海道の絶景)
+```
+
+以下のHTMLとしてレンダリングされます。
+
+```html
+<figure class="post-figure">
+  <img src="./images/image.png" alt="代替テキスト">
+  <figcaption>しまなみ海道の絶景</figcaption>
+</figure>
+```
+
 ---
 
 ## リスト
